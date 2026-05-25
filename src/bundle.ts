@@ -131,7 +131,7 @@ export class L402BundleClient {
       body: JSON.stringify({ forceL402: true })
     });
 
-    return requestJson<L402McpSession>(this.fetchImpl, `${apiUrl}/api/mcp/confirm`, {
+    const confirm = await requestJson<Omit<L402McpSession, 'quoteId'> & { quoteId?: string }>(this.fetchImpl, `${apiUrl}/api/mcp/confirm`, {
       method: 'POST',
       headers: publicHeaders(this.publicKey),
       body: JSON.stringify({
@@ -139,6 +139,11 @@ export class L402BundleClient {
         macaroon: options.macaroon
       })
     });
+
+    return {
+      ...confirm,
+      quoteId: confirm.quoteId ?? start.quoteId
+    };
   }
 }
 

@@ -108,7 +108,6 @@ describe('L402BundleClient', () => {
       .mockResolvedValueOnce(jsonResponse({ quoteId: 'quote-1' }))
       .mockResolvedValueOnce(
         jsonResponse({
-          quoteId: 'quote-1',
           jwt: 'jwt-test',
           expiresIn: 600,
           remainingBudgetSats: 100,
@@ -119,6 +118,7 @@ describe('L402BundleClient', () => {
 
     const session = await client.createMcpSession({ macaroon: 'macaroon-test' });
 
+    expect(session.quoteId).toBe('quote-1');
     expect(session.jwt).toBe('jwt-test');
     expect(fakeFetch).toHaveBeenNthCalledWith(
       1,

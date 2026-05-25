@@ -14,12 +14,14 @@
   },
   "files": [
     "dist",
+    "scripts",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
+    "smoke:local": "npm run build && node scripts/smoke-local.mjs",
     "test": "vitest run"
   },
   "engines": {
