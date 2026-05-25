@@ -49,3 +49,58 @@ export interface L402VerifyResult {
   valid: boolean;
   tokenType: 'L402';
 }
+
+export type L402BundleTierName = 'starter' | 'growth' | 'scale' | 'enterprise';
+
+export interface L402BundleClientConfig {
+  publicKey: string;
+  baseUrl?: string;
+  fetch?: FetchLike;
+  payer?: L402Payer;
+}
+
+export interface L402BundleTier {
+  name: L402BundleTierName;
+  totalCalls: number;
+  priceSats: number;
+  effectiveRate: number;
+  validDays: number;
+}
+
+export interface L402BundleInvoice {
+  bundleId: string;
+  invoice: string;
+  bolt11: string;
+  paymentHash: string;
+  amountSats: number;
+  expiresAtUnix: number;
+  tier: L402BundleTierName;
+  totalCalls: number;
+}
+
+export interface L402BundleClaim {
+  macaroon: string;
+  bundleId: string;
+  remainingCalls: number;
+  expiresAtUnix: number;
+  scopes: string[];
+}
+
+export interface L402BundleStatus {
+  bundleId: string;
+  tier: L402BundleTierName;
+  totalCalls: number;
+  remainingCalls: number;
+  usedCalls: number;
+  expiresAtUnix: number;
+  isExpired: boolean;
+  isDepleted: boolean;
+}
+
+export interface L402McpSession {
+  quoteId: string;
+  jwt: string;
+  expiresIn: number;
+  remainingBudgetSats: number;
+  refreshToken?: string | null;
+}

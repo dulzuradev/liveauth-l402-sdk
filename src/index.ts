@@ -1,3 +1,4 @@
+export { L402BundleClient, L402BundleTiers } from './bundle.js';
 export { L402Client } from './client.js';
 export {
   BundleClaimTimeoutError,
@@ -19,7 +20,14 @@ export { currentUnix, isStoredTokenFresh, MemoryTokenStore } from './token-store
 export type {
   FetchLike,
   L402ClientConfig,
+  L402BundleClaim,
+  L402BundleClientConfig,
+  L402BundleInvoice,
+  L402BundleStatus,
+  L402BundleTier,
+  L402BundleTierName,
   L402Invoice,
+  L402McpSession,
   L402Payer,
   L402PaymentResult,
   L402StoredToken,
