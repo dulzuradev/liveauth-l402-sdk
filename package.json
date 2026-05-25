@@ -5,6 +5,7 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -21,6 +22,20 @@
     "prepare": "npm run build",
     "test": "vitest run"
   },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liveauth-labs/liveauth-l402-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/liveauth-labs/liveauth-l402-sdk/issues"
+  },
+  "homepage": "https://github.com/liveauth-labs/liveauth-l402-sdk#readme",
   "keywords": [
     "l402",
     "lightning",

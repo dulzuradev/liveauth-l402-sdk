@@ -145,4 +145,63 @@ describe('L402Client', () => {
       })
     );
   });
+
+  it('creates an invoice when a 402 challenge does not include one', async () => {
+    const fakeFetch = vi
+      .fn()
+      .mockResolvedValueOnce(
+        jsonResponse(
+          {
+            message: 'Call /api/public/l402/invoice to get an invoice'
+          },
+          { status: 402 }
+        )
+      )
+      .mockResolvedValueOnce(
+        jsonResponse({
+          paymentHash: 'hash-fallback',
+          bolt11: 'lnbc1fallback',
+          amountSats: 3,
+          expiresAtUnix: 123
+        })
+      )
+      .mockResolvedValueOnce(
+        jsonResponse({
+          token: 'token-fallback',
+          tokenType: 'L402',
+          expiresInSeconds: 60
+        })
+      )
+      .mockResolvedValueOnce(jsonResponse({ ok: true }));
+
+    const client = new L402Client({
+      publicKey: 'la_pk_test',
+      baseUrl: 'https://api.test',
+      fetch: fakeFetch,
+      payer: {
+        async payInvoice(invoice) {
+          return { paymentHash: invoice.paymentHash };
+        }
+      }
+    });
+
+    const response = await client.request('https://resource.test', undefined, {
+      amountSats: 3,
+      destination: 'agent-1'
+    });
+
+    expect(response.status).toBe(200);
+    expect(fakeFetch).toHaveBeenNthCalledWith(
+      2,
+      'https://api.test/api/public/l402/invoice?destination=agent-1&amountSats=3',
+      expect.objectContaining({ method: 'POST' })
+    );
+    expect(fakeFetch).toHaveBeenNthCalledWith(
+      4,
+      'https://resource.test',
+      expect.objectContaining({
+        headers: expect.objectContaining({ Authorization: 'L402 token-fallback' })
+      })
+    );
+  });
 });
