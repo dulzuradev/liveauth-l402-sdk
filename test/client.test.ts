@@ -38,7 +38,9 @@ describe('L402Client', () => {
       jsonResponse({
         token: 'token-test',
         tokenType: 'L402',
-        expiresInSeconds: 60
+        expiresInSeconds: 60,
+        tokenScope: 'allowance_scoped_bearer',
+        remainingCalls: 1
       })
     );
     const store = new MemoryTokenStore();
@@ -47,6 +49,8 @@ describe('L402Client', () => {
     const result = await client.validatePayment('hash-test');
 
     expect(result.expiresAtUnix).toBeGreaterThan(0);
+    expect(result.tokenScope).toBe('allowance_scoped_bearer');
+    expect(result.remainingCalls).toBe(1);
     expect(await client.getToken()).toBe('token-test');
   });
 

@@ -22,6 +22,8 @@ export interface L402TokenResult {
   tokenType: 'L402';
   expiresInSeconds: number;
   expiresAtUnix: number;
+  tokenScope?: string;
+  remainingCalls?: number;
 }
 
 export interface L402Payer {

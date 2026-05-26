@@ -62,7 +62,7 @@ const valid = await l402.hasValidToken();
 await l402.clearToken();
 ```
 
-Current LiveAuth v0.1 L402 tokens are project-bound, time-scoped bearer tokens. They are not single-use yet.
+Current LiveAuth v0.1 pay-per-call tokens are project-bound, allowance-scoped bearer tokens. By default, one paid invoice grants one protected call before the token is exhausted. Bundles are the multi-call path.
 
 ## Bundle Purchase
 

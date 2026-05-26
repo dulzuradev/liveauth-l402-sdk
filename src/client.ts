@@ -24,6 +24,8 @@ interface ValidateResponse {
   tokenType: 'L402';
   expiresInSeconds: number;
   expiresAtUnix?: number;
+  tokenScope?: string;
+  remainingCalls?: number;
 }
 
 export class L402Client {
@@ -77,7 +79,9 @@ export class L402Client {
       token: response.token,
       tokenType: response.tokenType,
       expiresInSeconds: response.expiresInSeconds,
-      expiresAtUnix: response.expiresAtUnix ?? currentUnix() + response.expiresInSeconds
+      expiresAtUnix: response.expiresAtUnix ?? currentUnix() + response.expiresInSeconds,
+      tokenScope: response.tokenScope,
+      remainingCalls: response.remainingCalls
     };
 
     await this.setToken(result.token, result.expiresAtUnix);
