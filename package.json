@@ -14,13 +14,13 @@
   },
   "files": [
     "dist",
-    "scripts",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
+    "prepublishOnly": "npm test",
     "smoke:local": "npm run build && node scripts/smoke-local.mjs",
     "test": "vitest run"
   },
@@ -32,12 +32,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/liveauth-labs/liveauth-l402-sdk.git"
+    "url": "git+https://github.com/dulzuradev/liveauth-l402-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/liveauth-labs/liveauth-l402-sdk/issues"
+    "url": "https://github.com/dulzuradev/liveauth-l402-sdk/issues"
   },
-  "homepage": "https://github.com/liveauth-labs/liveauth-l402-sdk#readme",
+  "homepage": "https://github.com/dulzuradev/liveauth-l402-sdk#readme",
   "keywords": [
     "l402",
     "lightning",
