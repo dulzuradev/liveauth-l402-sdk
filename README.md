@@ -113,3 +113,11 @@ import {
 ```
 
 LiveAuth accepts `Authorization: L402 <token>` for L402-protected calls and `Authorization: Bearer <jwt>` for MCP-gated calls.
+
+## Examples
+
+- [examples/402-retry-flow.ts](examples/402-retry-flow.ts) shows a manual 402 retry flow with `extractInvoiceFrom402()`, `validatePayment()`, and `withL402Token()`.
+
+## Release Notes
+
+See [CHANGELOG.md](CHANGELOG.md) for release history and [RELEASE.md](RELEASE.md) for the publish checklist.
